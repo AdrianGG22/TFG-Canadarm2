@@ -1,4 +1,6 @@
 # TFG-Canadarm2
+![Demo animado](assets/canadarm2.gif)
+
 Para poder utilizar este repositorio se recomienda instalar el entorno de conda "environment.yaml".
 ```bash
 conda env create -f environment.yaml
