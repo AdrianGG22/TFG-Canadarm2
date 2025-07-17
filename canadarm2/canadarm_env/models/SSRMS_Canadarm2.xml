@@ -1,0 +1,79 @@
+<mujoco model="SSRMS_Canadarm2">
+  <compiler angle="radian"/>
+  <option integrator="implicitfast"/>
+  <option gravity="0 0 0" />
+
+  <asset>
+    <texture type="cube" name="ee_texture" file="./assets/link_joint.png"/>
+    <material name="ee_material" texture="ee_texture"/>
+    <mesh name="ee" file="./assets/ee.stl"/>
+    <mesh name="joint_v3_0" file="./assets/joint_v3_0.stl"/>
+    <mesh name="long_link_1_v3_0" file="./assets/long_link_1_v3_0.stl"/>
+    <mesh name="link_joint_v2_1" file="./assets/link_joint_v2_1.stl"/>
+    <mesh name="long_link_2_v3_0" file="./assets/long_link_2_v3_0.stl"/>
+    <mesh name="iss_mesh" file="./assets/iss.stl"/>
+  </asset>
+
+  <worldbody>
+
+    <geom pos="0 0 3" type="mesh" material="ee_material" mesh="ee" quat="0 1 0 0"/>
+    <body name="B1" pos="0 0 3" quat="0 1 0 0">
+      <inertial pos="0.25082 0 -0.175" mass="105.98" diaginertia="12.19 12.19 3.061"/>
+      <joint name="Base_Joint" pos="0 0 0" axis="0 0 1" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"  />
+      <geom pos="0.25082 0 -0.175" quat="0.707105 0 -0.707108 0" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+      <body name="B2" pos="0.25082 0 -0.175">
+        <inertial pos="0.175 0 -0.25082" mass="105.98" diaginertia="12.19 12.13 3.061"/>
+        <joint name="Shoulder_Roll" pos="0 0 0" axis="1 0 0" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"  />
+        <geom pos="0.175 0 -0.25082" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+        <body name="B3" pos="0.175 0 -0.25082">
+          <inertial pos="4 0 -0.175" quat="0 0.707107 0 0.707107" mass="314.88" diaginertia="2103.19 2094.71 15.41"/>
+          <joint name="Shoulder_Yaw" pos="0 0 0" axis="0 0 1" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"  />
+          <geom pos="0.25082 0 -0.175" quat="0.707105 0 -0.707108 0" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+          <geom pos="0.25082 0 -0.175" quat="0.499998 -0.5 0.500002 -0.5" type="mesh" material="ee_material" mesh="long_link_1_v3_0"/>
+          <geom pos="7.36082 0 -0.175" quat="0.707105 0 0.707108 0" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+          <geom size="0.165 0.13" pos="7.61164 0 -0.472" quat="0.707105 0 0 0.707108" type="cylinder" material="ee_material"/>
+          <body name="B4" pos="7.61164 0 -0.6">
+            <inertial pos="-3.6 0 -0.175" quat="0.5 0.5 0.5 0.5" mass="279.2" diaginertia="1966.28 1966.28 9.522"/>
+            <joint name="Elbow_Pitch" pos="0 0 0" axis="0 0 1" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"  />
+            <geom pos="-0.25082 0 -0.175" quat="0.707105 0 0.707108 0" type="mesh" material="ee_material" mesh="link_joint_v2_1"/>
+            <geom pos="-7.36082 0 -0.175" quat="-0.499203 0.500398 -0.5 0.500398" type="mesh" material="ee_material" mesh="long_link_2_v3_0"/>
+            <geom pos="-7.36082 0 -0.175" quat="0.707388 0 -0.706825 0" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+            <body name="B5" pos="-7.61164 0 -0.35">
+              <inertial pos="0 0 0" quat="0.707107 0.707107 0 0" mass="105.98" diaginertia="8.305 8.0386 3.061"/>
+              <joint name="Wrist_Pitch" pos="0 0 0" axis="0 0 -1" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"  />
+              <geom quat="0.000796327 0 -1 0" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+              <body name="B6" pos="-0.175 0 -0.25082">
+                <inertial pos="0 0 0" mass="105.98" diaginertia="12.13 12.13 3.061"/>
+                <joint name="Wrist_Yaw" pos="0 0 0" axis="1 0 0" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"  />
+                <geom quat="0.707105 0 -0.707108 0" type="mesh" material="ee_material" mesh="joint_v3_0"/>
+                <body name="EE_SSRMS" pos="-0.25082 0 -0.175">
+                  <inertial pos="0 0 -0.5" quat="0.5 0.5 0.5 0.5" mass="243.66" diaginertia="44.41 44.41 9.336" />
+                  <joint name="Wrist_Roll" pos="0 0 0" axis="0 0 1" range="-4.71239 4.71239" actuatorfrcrange="-2332 2332"/>
+                  <geom quat="4.63268e-05 0 -1 0" type="mesh" material="ee_material" mesh="ee"/>
+                  <site name="ee_tip" pos="0 0 -1.4" size="0.1" rgba="1 0 0 0.3"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    
+    <body name="ISS" pos="0 -0.05 -0.6">
+      <geom type="mesh" mesh="iss_mesh" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1" />
+    </body>
+
+    <geom name="target_marker" type="sphere" pos="8.5 3 9" size="0.2" rgba="1 0 0 1" contype="0" conaffinity="0"/>
+  </worldbody>
+
+  <actuator>
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="80" kv="5"  joint="Base_Joint" />
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="80" kv="5"  joint="Shoulder_Roll" />
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="80" kv="5"  joint="Shoulder_Yaw" />
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="80" kv="5"  joint="Elbow_Pitch" />
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="80" kv="5"  joint="Wrist_Pitch" />
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="80" kv="5"  joint="Wrist_Yaw" />
+    <position ctrllimited="true" ctrlrange="-4.71239 4.71239" kp="10" kv="10" joint="Wrist_Roll" />
+  </actuator>
+  
+</mujoco>
